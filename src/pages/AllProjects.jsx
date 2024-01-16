@@ -206,7 +206,6 @@ export default function AllProjects() {
                             name={name}
                             description={description}
                             url={html_url}
-                            demo={homepage}
                           />
                         </Col>
                       );
@@ -226,7 +225,6 @@ export default function AllProjects() {
                             name={name}
                             description={description}
                             url={html_url}
-                            demo={homepage}
                           />
                         </Col>
                       );

@@ -3,7 +3,7 @@ import styled from "styled-components";
 // Icons
 import { Icon } from "@iconify/react";
 // Media
-import GH from "../images/logo.jpg";
+import GH from "../images/project_vector_prev_ui.png";
 // Components
 import { Card } from "react-bootstrap";
 
@@ -32,7 +32,7 @@ const StyledCardComponent = styled.div`
   }
 `;
 
-export default function StyledCard({ image, name, description, url, demo }) {
+export default function StyledCard({ image, name, description, url}) {
   return (
     <StyledCardComponent>
       <Card>
@@ -45,12 +45,6 @@ export default function StyledCard({ image, name, description, url, demo }) {
         <Card.Body className="overflow-auto text-center">
           <Card.Title>{name}</Card.Title>
           <Card.Text>{description}</Card.Text>
-          {demo !== "" ? (
-            <Card.Link href={demo}>
-              {"Live Demo "}
-              <Icon icon="icon-park-outline:code-computer" />
-            </Card.Link>
-          ) : null}
         </Card.Body>
         <Card.Footer className="text-center">
           <Card.Link href={url}>

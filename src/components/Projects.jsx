@@ -81,7 +81,6 @@ export default function Projects() {
                         name={name}
                         description={description}
                         url={html_url}
-                        demo={homepage}
                       />
                     </Col>
                   );
