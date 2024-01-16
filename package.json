@@ -21,6 +21,7 @@
     "workbox-strategies": "^6.5.4"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@iconify/react": "^4.1.0",
     "gh-pages": "^5.0.0",
     "react-scripts": "^5.0.1"
