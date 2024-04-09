@@ -32,7 +32,7 @@ export const moreInfo =
 
 
 // Resume link (string - "https://YourResumeUrl") - I am using CloudFront to share my resume (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html)
-export const resume = "https://drive.google.com/file/d/1zq_gjTQa8iKVMcDujYoctAC82-WPMw5K/view?usp=sharing";
+export const resume = "https://drive.google.com/file/d/1DwBkQBZJ4D_AZjX1EUszJS_KOc6MpN7I/view?usp=sharing";
 
 /* Projects
  ************************************************************** 

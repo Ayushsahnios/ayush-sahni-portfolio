@@ -37,11 +37,11 @@ let timelineElements = [
   },
   {
     id: 5,
-    title: "Business Analyst [Signzy Technologies]",
+    title: "Associate Software Engineer [Signzy Technologies]",
     location: "Bengaluru, India",
     description:
       "Coordinated with clients like master card, Emirates NBD to maintain & analyze the API services using AWS and SQL.",
-    date: "February 2020 - November 2020",
+    date: "February 2020 - May 2021",
     icon: "work",
   },
   {
