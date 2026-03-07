@@ -14,7 +14,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Ayush Sahni Portfolio</title>
-  <meta content="Ayush Sahni's personal portfolio - Cloud Engineer, DevOps Engineer, and Full-Stack Developer with experience in AWS, FastAPI, Docker, and Terraform." name="description">
+  <meta content="Ayush Sahni's personal portfolio - Cloud Engineer, DevOps Engineer, and Full-Stack Developer with experience in AWS, FastAPI, Docker, and Terraform." name="descriptison">
   <meta content="Ayush Sahni, Cloud Engineer, DevOps, Software Engineer, AWS, FastAPI, Docker, Terraform, Python, Portfolio, Full Stack Developer" name="keywords">
 
   <!-- Google Fonts -->
@@ -70,7 +70,8 @@
           <li class="active"><a href="#header"> <span>Home</span></a></li>
           <li><a href="#about"><span>About</span></a></li>
           <li><a href="#education"> <span>Education</span></a></li>
-          <li><a href="#experience"> <span>Experience</span></a></li>
+          <!-- <li><a href="#experience"> <span>Experience</span></a></li> -->
+<!--          <li><a href="#projects"> <span>Projects</span></a></li>-->
           <li><a href="#portfolio"> <span>Projects</span></a></li>
           <li><a href="#skills"> <span>Skills</span></a></li>
           <li><a href="https://drive.google.com/file/d/1m-grn3yslWMjiqUGUQ-eL4_tkATM8Xah/view?usp=sharing" target="_blank"> <span>Resume</span></a></li>
@@ -143,7 +144,7 @@
         <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
           <div class="icon-box">
             <i class="ri-database-2-line" style="color: #5578ff;"></i>
-            <h3>Cloud Computing</h3>
+            <h3>Cloud Compurting</h3>
           </div>
         </div>
         <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
@@ -273,16 +274,14 @@
           </div>
         </div>
 
-      </div><!-- End portfolio-container row -->
-    </div><!-- End portfolio container -->
-  </div><!-- End portfolio div -->
+
   </section>
   <!-- End Education Section -->
 
 
 
 <!-- Start Experience Section -->
-
+<!--
 <section id="experience" class="services">
   <div class="container">
     <div class="section-title">
@@ -337,7 +336,7 @@
         <div class="col-md-12 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
           <h4 style="text-align:left;"><a href="#" style="color:#12d640">Signzy Technologies</a><br> </h4>
           <h5 style="text-align:left;">February 2020 - May 2021</h5>
-          <p style="text-align:left;color:#fff"><em>Business Analyst</em></p>
+          <p style="text-align:left;color:#fff"><em>Buisness Analyst</em></p>
           <ul style="text-align:left;">
             <li>Led ETL project governance using PostgreSQL, AWS S3, and scheduled cron jobs to improve behavioral analytics coverage and campaign accuracy by 15%.</li>
             <li>Facilitated CI/CD modernization using Jenkins pipelines and Docker container strategies to cut rollback frequency and boost deployment confidence by 25%.</li>
@@ -441,7 +440,7 @@
     </div>
   </div>
 </section>
-
+-->
 <!-- End Experience Section -->
 
 
@@ -662,82 +661,75 @@
     const projectsPerPage = 6;
     let currentPage = 1;
     let repos = [];
-
+  
     const fallbackImage = "https://cdn-icons-png.flaticon.com/512/906/906343.png"; // default project vector
-
-    // Sanitize strings before inserting into the DOM to prevent XSS
-    function escapeHtml(str) {
-      const div = document.createElement("div");
-      div.appendChild(document.createTextNode(str));
-      return div.innerHTML;
-    }
-
-    // Try common preview image paths in parallel
+  
+    // Try common preview image paths
     async function getRepoImage(repo) {
       const paths = [
         `https://raw.githubusercontent.com/${githubUsername}/${repo.name}/main/preview.png`,
         `https://raw.githubusercontent.com/${githubUsername}/${repo.name}/main/assets/preview.png`
       ];
-
-      const results = await Promise.allSettled(paths.map(path =>
-        fetch(path).then(res => res.ok ? path : Promise.reject())
-      ));
-
-      for (const result of results) {
-        if (result.status === "fulfilled") return result.value;
+  
+      for (const path of paths) {
+        try {
+          const res = await fetch(path);
+          if (res.ok) return path;
+        } catch (e) {
+          // continue to next
+        }
       }
       return fallbackImage;
     }
-
+  
     async function displayProjects(page) {
       const container = document.getElementById("github-projects");
       container.innerHTML = "";
       const start = (page - 1) * projectsPerPage;
       const end = start + projectsPerPage;
       const currentRepos = repos.slice(start, end);
-
-      // Fetch all images in parallel
-      const images = await Promise.all(currentRepos.map(repo => getRepoImage(repo)));
-
-      // Build all cards at once and set innerHTML once to avoid repeated DOM re-parses
-      const html = currentRepos.map((repo, i) => `
-        <div class="col-md-4 mt-4">
-          <div class="card h-100" style="background-color:#1c1c1c; color:white; border:1px solid #333;">
-            <img src="${escapeHtml(images[i])}" class="card-img-top" alt="${escapeHtml(repo.name)}" style="height:200px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="card-title" style="font-weight:bold;">${escapeHtml(repo.name)}</h5>
-              <p class="card-text">${escapeHtml(repo.description || "No description provided.")}</p>
-              <a href="${escapeHtml(repo.html_url)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm mt-2">View on GitHub</a>
+  
+      for (const repo of currentRepos) {
+        const imageUrl = await getRepoImage(repo);
+  
+        const card = `
+          <div class="col-md-4 mt-4">
+            <div class="card h-100" style="background-color:#1c1c1c; color:white; border:1px solid #333;">
+              <img src="${imageUrl}" class="card-img-top" alt="${repo.name}" style="height:200px; object-fit:cover;">
+              <div class="card-body">
+                <h5 class="card-title" style="font-weight:bold;">${repo.name}</h5>
+                <p class="card-text">${repo.description || "No description provided."}</p>
+                <a href="${repo.html_url}" target="_blank" class="btn btn-outline-light btn-sm mt-2">View on GitHub</a>
+              </div>
             </div>
-          </div>
-        </div>`).join("");
-
-      container.innerHTML = html;
-
+          </div>`;
+        container.innerHTML += card;
+      }
+  
       document.getElementById("prevPage").disabled = page === 1;
       document.getElementById("nextPage").disabled = end >= repos.length;
     }
-
+  
     fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
         return res.json();
       })
       .then((data) => {
-        repos = data.filter(repo => !repo.fork);
+        repos = data.filter(repo => !repo.fork); // Optional
         displayProjects(currentPage);
       })
       .catch((err) => {
-        document.getElementById("github-projects").innerHTML = `<p style="color:red;">Failed to load projects: ${escapeHtml(err.message)}</p>`;
+        document.getElementById("github-projects").innerHTML = `<p style="color:red;">Failed to load projects: ${err.message}</p>`;
       });
-
+  
     document.getElementById("prevPage").addEventListener("click", () => {
       if (currentPage > 1) {
         currentPage--;
         displayProjects(currentPage);
       }
     });
-
+  
     document.getElementById("nextPage").addEventListener("click", () => {
       if (currentPage * projectsPerPage < repos.length) {
         currentPage++;
