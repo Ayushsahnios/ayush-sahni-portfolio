@@ -221,148 +221,39 @@
       .nav-links a { font-size: 17px; }
     }
 
-    /* ===== Hero ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 100px 24px 60px;
-      position: relative;
-    }
-    .hero-badge {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--accent-2);
-      border: 1px solid rgba(18, 214, 64, 0.35);
-      background: rgba(18, 214, 64, 0.06);
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 28px;
-      letter-spacing: 0.5px;
-    }
-    .hero-badge::before {
-      content: '';
-      display: inline-block;
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--accent-2);
-      margin-right: 9px;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(18, 214, 64, 0.5); }
-      50% { box-shadow: 0 0 0 6px rgba(18, 214, 64, 0); }
-    }
-    .hero h1 {
-      font-family: var(--font-head);
-      font-size: clamp(44px, 8vw, 84px);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -1.5px;
-    }
-    .hero h1 .gradient-text {
-      background: var(--gradient-3);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: shine 6s linear infinite;
-    }
-    @keyframes shine { to { background-position: 200% center; } }
-    .hero .typeline {
-      font-family: var(--font-mono);
-      font-size: clamp(17px, 3vw, 24px);
-      color: var(--muted);
-      margin-top: 22px;
-      min-height: 36px;
-    }
-    .hero .typeline .typed { color: var(--accent); }
-    .hero .typeline .cursor {
-      display: inline-block;
-      width: 10px;
-      color: var(--accent);
-      animation: blink 0.9s step-end infinite;
-    }
-    @keyframes blink { 50% { opacity: 0; } }
-    .hero p.sub {
-      max-width: 620px;
-      margin: 26px auto 0;
-      color: var(--muted);
-      font-size: 17px;
-      font-weight: 300;
-    }
-    .hero-ctas {
-      margin-top: 42px;
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .btn {
-      font-family: var(--font-head);
-      font-size: 15.5px;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 14px 32px;
-      border-radius: 10px;
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-      display: inline-block;
-    }
-    .btn-primary {
-      background: var(--gradient);
-      color: #04121a;
-      box-shadow: 0 0 24px rgba(0, 229, 255, 0.3);
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 36px rgba(0, 229, 255, 0.5);
-    }
-    .btn-ghost {
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: var(--card);
-      backdrop-filter: blur(8px);
-    }
-    .btn-ghost:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-glow);
-      box-shadow: 0 0 24px rgba(0, 229, 255, 0.15);
-    }
-    .hero-socials {
-      margin-top: 46px;
-      display: flex;
-      gap: 22px;
-    }
-    .hero-socials a, .contact-socials a {
-      color: var(--muted);
-      transition: color 0.2s, transform 0.2s;
-      display: inline-flex;
-    }
-    .hero-socials a:hover, .contact-socials a:hover {
-      color: var(--accent);
-      transform: translateY(-3px);
-    }
-    .hero-socials svg, .contact-socials svg { width: 22px; height: 22px; fill: currentColor; }
+<body>
+  
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BB8W2X"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!-- ======= Header ======= -->
+  <header id="header" class="header-tops">
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 34px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--muted);
-      font-size: 12px;
-      font-family: var(--font-mono);
-      letter-spacing: 2px;
-      animation: floaty 2.4s ease-in-out infinite;
-      text-decoration: none;
-    }
-    @keyframes floaty {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, 8px); }
-    }
+    <div class="container">
+
+      <h1><a href="index.html">Ayush Sahni</a></h1>
+      <h2 style="color:#fff">I'm <span class="typing" style="color:#12D640"></span></h2>
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#header"> <span>Home</span></a></li>
+          <li><a href="#about"><span>About</span></a></li>
+          <li><a href="#education"> <span>Education</span></a></li>
+          <!-- <li><a href="#experience"> <span>Experience</span></a></li> -->
+<!--          <li><a href="#projects"> <span>Projects</span></a></li>-->
+          <li><a href="#portfolio"> <span>Projects</span></a></li>
+          <li><a href="#skills"> <span>Skills</span></a></li>
+          <li><a href="https://drive.google.com/file/d/1bBJJllGtrmn_fia73Fki_37B5-zMIb2j/view?usp=drive_link" target="_blank"> <span>Resume</span></a></li>
+          <!-- <li><a href="#links"> <span>Resume & Links</span></a></li> -->
+          <li><a href="#contacts"> <span>Contact</span></a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+
+      <div class="social-links">
+          <a href="https://www.linkedin.com/in/ayush-sahni" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://github.com/ayushsahnios" target="_blank" class="github"><i class="bx bxl-github"></i></a>
+          <a href="mailto:ayushsahni.work@gmail.com" target="_blank" class="google"><i class="bx bxl-google"></i></a>
 
     /* ===== Sections ===== */
     section { padding: 110px 0; }
