@@ -221,39 +221,148 @@
       .nav-links a { font-size: 17px; }
     }
 
-<body>
-  
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5BB8W2X"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <!-- ======= Header ======= -->
-  <header id="header" class="header-tops">
+    /* ===== Hero ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      position: relative;
+    }
+    .hero-badge {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-2);
+      border: 1px solid rgba(18, 214, 64, 0.35);
+      background: rgba(18, 214, 64, 0.06);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    .hero-badge::before {
+      content: '';
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent-2);
+      margin-right: 9px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(18, 214, 64, 0.5); }
+      50% { box-shadow: 0 0 0 6px rgba(18, 214, 64, 0); }
+    }
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(44px, 8vw, 84px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+    }
+    .hero h1 .gradient-text {
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% auto;
+      animation: shine 6s linear infinite;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+    .hero .typeline {
+      font-family: var(--font-mono);
+      font-size: clamp(17px, 3vw, 24px);
+      color: var(--muted);
+      margin-top: 22px;
+      min-height: 36px;
+    }
+    .hero .typeline .typed { color: var(--accent); }
+    .hero .typeline .cursor {
+      display: inline-block;
+      width: 10px;
+      color: var(--accent);
+      animation: blink 0.9s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero p.sub {
+      max-width: 620px;
+      margin: 26px auto 0;
+      color: var(--muted);
+      font-size: 17px;
+      font-weight: 300;
+    }
+    .hero-ctas {
+      margin-top: 42px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn {
+      font-family: var(--font-head);
+      font-size: 15.5px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .btn-primary {
+      background: var(--gradient);
+      color: #04121a;
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 36px rgba(0, 229, 255, 0.5);
+    }
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+    }
+    .btn-ghost:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-glow);
+      box-shadow: 0 0 24px rgba(0, 229, 255, 0.15);
+    }
+    .hero-socials {
+      margin-top: 46px;
+      display: flex;
+      gap: 22px;
+    }
+    .hero-socials a, .contact-socials a {
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+      display: inline-flex;
+    }
+    .hero-socials a:hover, .contact-socials a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+    .hero-socials svg, .contact-socials svg { width: 22px; height: 22px; fill: currentColor; }
 
-    <div class="container">
-
-      <h1><a href="index.html">Ayush Sahni</a></h1>
-      <h2 style="color:#fff">I'm <span class="typing" style="color:#12D640"></span></h2>
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"><a href="#header"> <span>Home</span></a></li>
-          <li><a href="#about"><span>About</span></a></li>
-          <li><a href="#education"> <span>Education</span></a></li>
-          <!-- <li><a href="#experience"> <span>Experience</span></a></li> -->
-<!--          <li><a href="#projects"> <span>Projects</span></a></li>-->
-          <li><a href="#portfolio"> <span>Projects</span></a></li>
-          <li><a href="#skills"> <span>Skills</span></a></li>
-          <li><a href="https://drive.google.com/file/d/1bBJJllGtrmn_fia73Fki_37B5-zMIb2j/view?usp=drive_link" target="_blank"> <span>Resume</span></a></li>
-          <!-- <li><a href="#links"> <span>Resume & Links</span></a></li> -->
-          <li><a href="#contacts"> <span>Contact</span></a></li>
-
-        </ul>
-      </nav><!-- .nav-menu -->
-
-      <div class="social-links">
-          <a href="https://www.linkedin.com/in/ayush-sahni" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://github.com/ayushsahnios" target="_blank" class="github"><i class="bx bxl-github"></i></a>
-          <a href="mailto:ayushsahni.work@gmail.com" target="_blank" class="google"><i class="bx bxl-google"></i></a>
+    .scroll-hint {
+      position: absolute;
+      bottom: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      letter-spacing: 2px;
+      animation: floaty 2.4s ease-in-out infinite;
+      text-decoration: none;
+    }
+    @keyframes floaty {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 8px); }
+    }
 
     /* ===== Sections ===== */
     section { padding: 110px 0; }
@@ -543,6 +652,21 @@
       background: rgba(0, 229, 255, 0.1);
       box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
     }
+    .proj-card.featured { grid-column: 1 / -1; flex-direction: row; }
+    .proj-card.featured img {
+      width: 42%;
+      height: auto;
+      max-height: 420px;
+      border-bottom: none;
+      border-right: 1px solid var(--border);
+    }
+    .proj-card.featured .proj-body { padding: 32px 36px; justify-content: center; }
+    .proj-card.featured h3 { font-size: 24px; }
+    .proj-card.featured p { font-size: 15.5px; flex: none; }
+    @media (max-width: 800px) {
+      .proj-card.featured { flex-direction: column; }
+      .proj-card.featured img { width: 100%; height: 260px; border-right: none; border-bottom: 1px solid var(--border); }
+    }
     .featured-ribbon {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -703,7 +827,7 @@
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a class="resume-btn" href="https://drive.google.com/file/d/1m-grn3yslWMjiqUGUQ-eL4_tkATM8Xah/view?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a></li>
+        <li><a class="resume-btn" href="https://drive.google.com/file/d/1bBJJllGtrmn_fia73Fki_37B5-zMIb2j/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Resume</a></li>
       </ul>
     </div>
   </nav>
@@ -717,7 +841,7 @@
       <p class="sub">Turning enterprise pain points into AI-powered systems — from LLM agents and automation pipelines to cloud-native infrastructure that scales.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#projects">View My Work</a>
-        <a class="btn btn-ghost" href="https://drive.google.com/file/d/1m-grn3yslWMjiqUGUQ-eL4_tkATM8Xah/view?usp=sharing" target="_blank" rel="noopener noreferrer">Download Resume</a>
+        <a class="btn btn-ghost" href="https://drive.google.com/file/d/1bBJJllGtrmn_fia73Fki_37B5-zMIb2j/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Download Resume</a>
       </div>
       <div class="hero-socials">
         <a href="https://www.linkedin.com/in/ayush-sahni" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -989,14 +1113,18 @@
         </div>
 
         <div class="proj-grid" style="margin-bottom: 60px;">
-          <div class="proj-card tilt reveal">
-            <img src="assets/img/project/dino_game.png" alt="Dino Jump Controller project screenshot">
+          <div class="proj-card featured tilt reveal">
+            <img src="assets/img/project/zero_cloud_home_lab.jpeg" alt="Zero Cloud Home Lab — 3 Chromebooks on a rack running the self-hosted cluster" style="object-position: center 45%;">
             <div class="proj-body">
               <span class="featured-ribbon">FEATURED</span>
-              <h3>Dino Jump Controller</h3>
-              <p>Computer-vision game controller that uses head-pose tracking (DeepGaze) to play the Chrome Dino game hands-free — mapping real-world head movement to in-game jumps in real time.</p>
+              <h3>Zero Cloud Home Lab</h3>
+              <p>3-node k3s Kubernetes cluster built from 3 Chromebooks — self-hosting Nginx, Grafana, Prometheus, Gitea, Drone CI, and Pi-hole, all exposed to the internet through Cloudflare Tunnel with zero open inbound ports and zero cloud bills. Live at ayush1.xyz.</p>
+              <div class="t-tags" style="margin-top: 14px;">
+                <span class="tag">k3s</span><span class="tag">Docker</span><span class="tag">Cloudflare Tunnel</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Gitea</span><span class="tag">Drone CI</span><span class="tag">Pi-hole</span><span class="tag">NFS</span>
+              </div>
               <div class="proj-links">
-                <a href="projects/deepgaze_dinogame.html" target="_blank" rel="noopener noreferrer">Case Study →</a>
+                <a href="https://github.com/Ayushsahnios/zero-cloud-home-lab" target="_blank" rel="noopener noreferrer">GitHub →</a>
+                <a href="https://ayush1.xyz" target="_blank" rel="noopener noreferrer">Live Site →</a>
               </div>
             </div>
           </div>
