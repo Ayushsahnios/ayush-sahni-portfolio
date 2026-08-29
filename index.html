@@ -652,6 +652,21 @@
       background: rgba(0, 229, 255, 0.1);
       box-shadow: 0 0 16px rgba(0, 229, 255, 0.2);
     }
+    .proj-card.featured { grid-column: 1 / -1; flex-direction: row; }
+    .proj-card.featured img {
+      width: 42%;
+      height: auto;
+      max-height: 420px;
+      border-bottom: none;
+      border-right: 1px solid var(--border);
+    }
+    .proj-card.featured .proj-body { padding: 32px 36px; justify-content: center; }
+    .proj-card.featured h3 { font-size: 24px; }
+    .proj-card.featured p { font-size: 15.5px; flex: none; }
+    @media (max-width: 800px) {
+      .proj-card.featured { flex-direction: column; }
+      .proj-card.featured img { width: 100%; height: 260px; border-right: none; border-bottom: 1px solid var(--border); }
+    }
     .featured-ribbon {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -1098,14 +1113,18 @@
         </div>
 
         <div class="proj-grid" style="margin-bottom: 60px;">
-          <div class="proj-card tilt reveal">
-            <img src="assets/img/project/dino_game.png" alt="Dino Jump Controller project screenshot">
+          <div class="proj-card featured tilt reveal">
+            <img src="assets/img/project/zero_cloud_home_lab.jpeg" alt="Zero Cloud Home Lab — 3 Chromebooks on a rack running the self-hosted cluster" style="object-position: center 45%;">
             <div class="proj-body">
               <span class="featured-ribbon">FEATURED</span>
-              <h3>Dino Jump Controller</h3>
-              <p>Computer-vision game controller that uses head-pose tracking (DeepGaze) to play the Chrome Dino game hands-free — mapping real-world head movement to in-game jumps in real time.</p>
+              <h3>Zero Cloud Home Lab</h3>
+              <p>3-node k3s Kubernetes cluster built from 3 Chromebooks — self-hosting Nginx, Grafana, Prometheus, Gitea, Drone CI, and Pi-hole, all exposed to the internet through Cloudflare Tunnel with zero open inbound ports and zero cloud bills. Live at ayush1.xyz.</p>
+              <div class="t-tags" style="margin-top: 14px;">
+                <span class="tag">k3s</span><span class="tag">Docker</span><span class="tag">Cloudflare Tunnel</span><span class="tag">Grafana</span><span class="tag">Prometheus</span><span class="tag">Gitea</span><span class="tag">Drone CI</span><span class="tag">Pi-hole</span><span class="tag">NFS</span>
+              </div>
               <div class="proj-links">
-                <a href="projects/deepgaze_dinogame.html" target="_blank" rel="noopener noreferrer">Case Study →</a>
+                <a href="https://github.com/Ayushsahnios/zero-cloud-home-lab" target="_blank" rel="noopener noreferrer">GitHub →</a>
+                <a href="https://ayush1.xyz" target="_blank" rel="noopener noreferrer">Live Site →</a>
               </div>
             </div>
           </div>
