@@ -12,6 +12,9 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; frame-src https://*.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#04070d">
 
   <title>Ayush Sahni | AI Builder &amp; Cloud Engineer</title>
   <meta name="description" content="Ayush Sahni — AI Builder at ITS Logistics. Cloud & DevOps engineer building enterprise AI systems, automation pipelines, and cloud-native platforms with AWS, Python, FastAPI, and Terraform.">
@@ -784,6 +787,29 @@
     .contact-card .c-value { color: var(--text); font-size: 15px; margin-top: 7px; word-break: break-word; }
     .contact-socials { display: flex; justify-content: center; gap: 26px; }
 
+    /* ===== Packet Hunter background game ===== */
+    .game-badge {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 90;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-2);
+      background: rgba(6, 12, 20, 0.85);
+      border: 1px solid rgba(18, 214, 64, 0.35);
+      border-radius: 100px;
+      padding: 7px 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 18px rgba(18, 214, 64, 0.15);
+      cursor: default;
+      user-select: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .game-badge.bump { transform: scale(1.18); box-shadow: 0 0 28px rgba(18, 214, 64, 0.45); }
+    @media (max-width: 600px) { .game-badge { bottom: 12px; right: 12px; font-size: 12px; } }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 34px 24px;
@@ -1259,19 +1285,30 @@
     </section>
   </main>
 
+  <div id="gameBadge" class="game-badge" hidden title="Packet Hunter — click the glowing packets drifting across the page!">📦 <span id="gameScore">0</span> packets caught</div>
+
   <footer>
-    <div>© <span id="year"></span> Ayush Sahni — designed &amp; built with <span class="heart">♥</span> in the cloud</div>
+    <div>© <span id="year"></span> Ayush Sahni — designed &amp; built with <span class="heart">♥</span> in the cloud · psst — try catching the glowing packets 📦</div>
   </footer>
 
   <script>
-    // ===== Particle network background =====
+    // ===== Particle network background + Packet Hunter mini-game =====
     (function () {
       const canvas = document.getElementById('particles');
       const ctx = canvas.getContext('2d');
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let particles = [];
+      let packets = [];   // catchable glowing packets
+      let bursts = [];    // pop explosion particles
       let mouse = { x: null, y: null };
       let w, h;
+
+      const badge = document.getElementById('gameBadge');
+      const scoreEl = document.getElementById('gameScore');
+      let score = 0;
+      try { score = parseInt(localStorage.getItem('packetScore'), 10) || 0; } catch (e) {}
+      scoreEl.textContent = score;
+      if (score > 0) badge.hidden = false;
 
       function resize() {
         w = canvas.width = window.innerWidth;
@@ -1286,7 +1323,77 @@
         }));
       }
 
-      function step() {
+      function spawnPacket() {
+        if (packets.length < 3) {
+          const fromLeft = Math.random() > 0.5;
+          packets.push({
+            x: fromLeft ? -24 : w + 24,
+            y: h * 0.12 + Math.random() * h * 0.72,
+            vx: (fromLeft ? 1 : -1) * (0.7 + Math.random() * 0.9),
+            vy: (Math.random() - 0.5) * 0.35,
+            hue: Math.random() > 0.5 ? '18, 214, 64' : '139, 92, 246',
+            born: performance.now()
+          });
+          badge.hidden = false;
+        }
+        setTimeout(spawnPacket, 4500 + Math.random() * 6000);
+      }
+
+      function popPacket(i, px, py) {
+        packets.splice(i, 1);
+        for (let k = 0; k < 16; k++) {
+          const ang = (Math.PI * 2 * k) / 16;
+          const speed = 1.5 + Math.random() * 2.5;
+          bursts.push({ x: px, y: py, vx: Math.cos(ang) * speed, vy: Math.sin(ang) * speed, life: 1 });
+        }
+        score++;
+        scoreEl.textContent = score;
+        try { localStorage.setItem('packetScore', score); } catch (e) {}
+        badge.classList.add('bump');
+        setTimeout(() => badge.classList.remove('bump'), 220);
+      }
+
+      window.addEventListener('pointerdown', e => {
+        for (let i = packets.length - 1; i >= 0; i--) {
+          const p = packets[i];
+          if (Math.hypot(e.clientX - p.x, e.clientY - p.y) < 42) {
+            popPacket(i, p.x, p.y);
+            break;
+          }
+        }
+      }, { passive: true });
+
+      function drawPackets(now) {
+        for (let i = packets.length - 1; i >= 0; i--) {
+          const p = packets[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < -60 || p.x > w + 60) { packets.splice(i, 1); continue; }
+          const pulse = 1 + 0.18 * Math.sin((now - p.born) / 220);
+          const s = 11 * pulse;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((now - p.born) / 900);
+          ctx.shadowColor = `rgba(${p.hue}, 0.9)`;
+          ctx.shadowBlur = 18;
+          ctx.fillStyle = `rgba(${p.hue}, 0.85)`;
+          ctx.fillRect(-s / 2, -s / 2, s, s);
+          ctx.strokeStyle = 'rgba(230, 237, 243, 0.8)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(-s / 2, -s / 2, s, s);
+          ctx.restore();
+        }
+        for (let i = bursts.length - 1; i >= 0; i--) {
+          const b = bursts[i];
+          b.x += b.vx; b.y += b.vy; b.vx *= 0.96; b.vy *= 0.96; b.life -= 0.03;
+          if (b.life <= 0) { bursts.splice(i, 1); continue; }
+          ctx.beginPath();
+          ctx.arc(b.x, b.y, 2.2 * b.life, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(18, 214, 64, ${b.life})`;
+          ctx.fill();
+        }
+      }
+
+      function step(now) {
         ctx.clearRect(0, 0, w, h);
         for (const p of particles) {
           p.x += p.vx; p.y += p.vy;
@@ -1321,6 +1428,7 @@
             }
           }
         }
+        drawPackets(now || performance.now());
         requestAnimationFrame(step);
       }
 
@@ -1328,7 +1436,11 @@
       window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
       window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
       resize();
-      if (!reduced) step();
+      if (!reduced) {
+        step(performance.now());
+        setTimeout(spawnPacket, 3000);
+        console.log('%c📦 Packet Hunter is live — click the glowing packets!', 'color:#12d640;font-family:monospace;font-size:13px');
+      }
     })();
 
     // ===== Typing effect =====
