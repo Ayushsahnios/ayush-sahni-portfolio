@@ -568,30 +568,6 @@ main { position: relative; z-index: 1; }
 .load-note { font-family: var(--mono); font-size: 14px; color: var(--muted); text-align: center; }
 .load-note a { color: var(--ink); }
 
-/* ---------- Packet Hunter (home easter egg) ---------- */
-#packets {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-.game-badge {
-  position: fixed;
-  left: 18px;
-  bottom: 18px;
-  z-index: 90;
-  font-family: var(--mono);
-  font-size: 13px;
-  color: #444;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 14px;
-  user-select: none;
-  transition: transform 0.2s ease;
-}
-.game-badge.bump { transform: scale(1.15); }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .poster { font-size: 28px; }
